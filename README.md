@@ -1,9 +1,9 @@
 # Adaptive Fingerprinting
 This repository contain the code and data for project "Adaptive Fingerprinting". The attack is a privacy leakage attack which utilize transfer learning techniques that can allows a passive adversary to perform website fingerprinting attack with very limited training data (<= 20 samples per class).
 
-The dataset and code are for research purposes only. The results of this study are published in the following paper:
+**The dataset and code are for research purposes only**. The results of this study are published in the following paper:
 
-Chenggang Wang, Jimmy Dani, Xiang Li, Xiaodong Jia, Boyang Wang, "Adaptive Fingerprinting: Website Fingerprinting over Few Encrypted Traffic," ACM Conference on Data and Application Security and Privacy (ACM Codaspy 2021), April, 2021.
+Chenggang Wang, Jimmy Dani, Xiang Li, Xiaodong Jia, Boyang Wang, "Adaptive Fingerprinting: Website Fingerprinting over Few Encrypted Traffic," ACM Conference on Data and Application Security and Privacy (**ACM CODASPY 2021**), April, 2021.
 
 
 ## Content
@@ -32,7 +32,7 @@ See the details in each subfolder.
 ## Citation
 When reporting results that use the dataset or code in this repository, please cite:
 
-Chenggang Wang, Jimmy Dani, Xiang Li, Xiaodong Jia, Boyang Wang, "Adaptive Fingerprinting: Website Fingerprinting over Few Encrypted Traffic," ACM Conference on Data and Application Security and Privacy (ACM Codaspy 2021), April, 2021.
+Chenggang Wang, Jimmy Dani, Xiang Li, Xiaodong Jia, Boyang Wang, "Adaptive Fingerprinting: Website Fingerprinting over Few Encrypted Traffic," ACM Conference on Data and Application Security and Privacy (**ACM CODASPY 2021**), April, 2021.
 
 ## Contacts
 Chenggang Wang, wang2c9@mail.uc.edu, University of Cincinnati
