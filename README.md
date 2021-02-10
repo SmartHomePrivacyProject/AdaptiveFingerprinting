@@ -1,5 +1,5 @@
 # Adaptive Fingerprinting
-This repository contain the code and data for project "Adaptive Fingerprinting". The attack is a privacy leakage attack which utilize transfer learning techniques that can allows a passive adversary to perform website fingerprinting attack with very limited training data (<= 20 samples per class).
+This repository contain the code and data for project "Adaptive Fingerprinting". The code can be used to perform website fingerprinting attacks when there are very limited training data (e.g., <= 20 traffic traces per class). Transfer learning, more specifically, adversarial domain adaption, is leveraged in this project to adress the challenges when training data is small. 
 
 **The dataset and code are for research purposes only**. The results of this study are published in the following paper:
 
