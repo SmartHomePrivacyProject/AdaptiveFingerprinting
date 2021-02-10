@@ -30,7 +30,7 @@ See the details in each subfolder.
 ## Citation
 When reporting results that use the dataset or code in this repository, please cite:
 
-Chenggang Wang, Jimmy Dani, Xiang Li, Xiaodong Jia, Boyang Wang, "Adaptive Fingerprinting: Website Fingerprinting over Few Encrypted Traffic," ACM Conference on Data and Application Security and Privacy (ACM Codaspy 2021), July, 2020.
+Chenggang Wang, Jimmy Dani, Xiang Li, Xiaodong Jia, Boyang Wang, "Adaptive Fingerprinting: Website Fingerprinting over Few Encrypted Traffic," ACM Conference on Data and Application Security and Privacy (ACM Codaspy 2021), April, 2021.
 
 ## Contacts
 Chenggang Wang, wang2c9@mail.uc.edu, University of Cincinnati
