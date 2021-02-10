@@ -3,6 +3,8 @@ This repository contain the code and data for project "Adaptive Fingerprinting".
 
 The dataset and code are for research purposes only. The results of this study are published in the following paper:
 
+Chenggang Wang, Jimmy Dani, Xiang Li, Xiaodong Jia, Boyang Wang, "Adaptive Fingerprinting: Website Fingerprinting over Few Encrypted Traffic," ACM Conference on Data and Application Security and Privacy (ACM Codaspy 2021), April, 2021.
+
 
 ## Content
 This repository contains separate directories for the attack, defense, website traffic datasets. A brief description of the contents of these directories is below. More detailed usage instrcutions are found in each subfolder's README.md file.
