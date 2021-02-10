@@ -1,5 +1,5 @@
 # Adaptive Fingerprinting
-This repository contain the code and data for project "Adaptive Fingerprinting". The code can be used to perform website fingerprinting attacks when there are very limited training data (e.g., <= 20 traffic traces per class). Transfer learning, more specifically, adversarial domain adaption, is leveraged in this project to adress the challenges when training data is small. 
+This repository contains the code and data for project "Adaptive Fingerprinting". The code can be used to perform website fingerprinting attacks when there are very limited training data (e.g., <= 20 traffic traces per class). Transfer learning, more specifically, adversarial domain adaption, is leveraged in this project to adress the challenges when training data is small. 
 
 **The dataset and code are for research purposes only**. The results of this study are published in the following paper:
 
