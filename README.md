@@ -1,4 +1,4 @@
-# AdaptiveFingerprinting
+# Adaptive Fingerprinting
 This repository contain the code and data for project "Adaptive Fingerprinting". The attack is a privacy leakage attack which utilize transfer learning techniques that can allows a passive adversary to perform website fingerprinting attack with very limited training data (<= 20 samples per class).
 
 The dataset and code are for research purposes only. The results of this study are published in the following paper:
@@ -14,7 +14,9 @@ THe attack directory contains the code for three transfer learning based attack 
 The defense directory contains the code for the WTF-PAD method.
 
 ### Dataset
-The datasets has infomation about where you can find and download the datasets
+All the four datasets we examined in the paper can be downloaded from the link below: 
+
+https://mailuc-my.sharepoint.com/:f:/g/personal/wang2ba_ucmail_uc_edu/Ej4IxFX-ZlVOgH2Ipc-C4p8BK-i_5iCt6bhxMx0xf8RUBg?e=9rHlsN
 
 ### Additional information
 The additional_info has information about the structures of the neural networks and its hyperparameters
