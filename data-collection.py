@@ -75,7 +75,7 @@ def tor_web_crawler(index, link, ip_address):
 
     # command to be executed for capturing the trace
     # command = "sudo tcpdump -i " + str(interface) + " -n host " + str(ip_address) + " -c " + str(pkt_count) + " -w " + PP + "/" + domain_name + "_" + str(index) + ".pcap "
-    command = "sudo timeout 120 tcpdump -i " + str(interface) + " -n host " + str(ip_address) + " -w " + PP + "/" + domain_name + "_" + str(index) + ".pcap"
+    command = "sudo timeout 60 tcpdump -i " + str(interface) + " -n host " + str(ip_address) + " -w " + PP + "/" + domain_name + "_" + str(index) + ".pcap"
     print('Capture trace ...')
     capture = subprocess.Popen(command, shell=True)
     time.sleep(1)
@@ -89,17 +89,15 @@ def tor_web_crawler(index, link, ip_address):
 if __name__ == '__main__':
     print('Starting to collect traffic trace for the webpages of similar topics...')
 
-    # IP_ADDRESS = '10.63.7.124'
-    IP_ADDRESS = '192.168.39.14'
+    IP_ADDRESS = '192.168.39.14' # ip-address of the machine from which traffic is to be captured
     print('IP-Address : ', IP_ADDRESS)
 
     # Number of traces to be collected for a partiular link
-    traces = 1
+    traces = 300 # number of traces to be collected for particular webpage
 
-    links_path = '../links/keyword-data.xlsx'
+    links_path = '../links/keyword-data.xlsx' # path to excel file containing links of the webpages
     # getting excel file containing links
     links = pd.read_excel(links_path)
-    links = links[:40]
 
     print('Web crawler started ...')
     start_time = pd.Timestamp.now()
