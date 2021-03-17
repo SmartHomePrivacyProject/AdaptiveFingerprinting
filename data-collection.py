@@ -78,7 +78,7 @@ def tor_web_crawler(index, link, ip_address):
     command = "sudo timeout 60 tcpdump -i " + str(interface) + " -n host " + str(ip_address) + " -w " + PP + "/" + domain_name + "_" + str(index) + ".pcap"
     print('Capture trace ...')
     capture = subprocess.Popen(command, shell=True)
-    time.sleep(1)
+#     time.sleep(1)
     capture.wait()
     print('Traffic trace captured and saved successfully.')
     # save the screenshot
