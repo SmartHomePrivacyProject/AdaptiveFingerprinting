@@ -12,6 +12,7 @@ import numpy as np
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
+from keras.preprocessing.sequence import pad_sequences
 
 RootDir = os.getenv('ROOT_DIR')
 toolsDir = os.path.join(RootDir, 'tools')
@@ -225,3 +226,85 @@ def kNN_precision_recall(signature_vector_dict, test_vector_dict, params, thresH
 
     Precision, Recall, TPR, FPR = calculatePrecAndRecAndTPRAndFPR(result_Mon, result_Unmon, y_test_mon, maxLabel, thresHold)
     return Precision, Recall, TPR, FPR
+
+
+''' ----------------------------------------------------------
+# ------------ 计算数据相似度，把大矩阵分成小矩阵 ------------
+# ---------------------------------------------------------'''
+
+
+def preprocessOneFile(fp):
+    oneData = np.load(fp)
+    return oneData
+
+
+def loadData(fList, max_len, droot=''):
+    if not isinstance(fList, list):
+        fList = list(fList)
+    if droot:
+        new_fList = ['{}'.format(os.path.join(droot, fn)) for fn in fList]
+        fList = new_fList
+    allData = []
+    for fp in fList:
+        tmp = preprocessOneFile(fp)
+        allData.append(tmp)
+
+    X = pad_sequences(allData, maxlen=max_len,
+                      padding='post', truncating='post')
+    X = X[:, :, np.newaxis]
+    return X
+
+
+def computeSimMat(conv, block, item, max_len):
+    dMat1 = loadData(block, max_len)
+    dMat2 = loadData(item, max_len)
+    embs1 = conv.predict(dMat1)
+    embs2 = conv.predict(dMat2)
+
+    embs1 = embs1 / np.linalg.norm(embs1, axis=-1, keepdims=True)
+    embs2 = embs2 / np.linalg.norm(embs2, axis=-1, keepdims=True)
+
+    all_sims = np.dot(embs1, embs2.T)
+    return all_sims
+
+
+def compute_one_row(conv, block, blockList, max_len):
+    '''对每一个block, 计算他与其他block的值，然后连接起来返回'''
+    for i, item in enumerate(blockList):
+        if 0 == i:
+            subMat = computeSimMat(conv, block, item, max_len)
+        else:
+            tmpMat = computeSimMat(conv, block, item, max_len)
+            subMat = np.hstack((subMat, tmpMat))
+    return subMat
+
+
+def build_similarities(conv, droot, fnames, batch_size, max_len):
+    '''传整个matrix可能会导致内存溢出，而我们只需要一个matrix
+    所以我们可以分别算每个小的matrix，然后再把它们拼接起来
+    尝试了下循环，根本写不出来，感觉应该用递归'''
+    fList = ['{}'.format(os.path.join(droot, fn)) for fn in fnames]
+    fNum = len(fList)
+    if fNum <= batch_size:
+        simMat = computeSimMat(conv, fList, fList, max_len)
+    else:
+        # cut the file list into block list with size of batch_size
+        blockNum = fNum // batch_size + 1
+        blockList = []
+        start, end = 0, batch_size
+        for i in range(blockNum):
+            tmp = fList[start:end]
+            blockList.append(tmp)
+            start = end
+            end = end + batch_size
+
+        # now we get the block list, we can fill the mat row by row
+        simMat = np.zeros(shape=(fNum, fNum))
+        start, end = 0, batch_size
+        for i, block in enumerate(blockList):
+            one_row = compute_one_row(conv, block, blockList, max_len)
+            simMat[start:end, :] = one_row
+            start = end
+            end = end + one_row.shape[0]
+
+    return simMat
