@@ -20,7 +20,7 @@ All the four datasets we examined in the paper can be downloaded from the link b
 
 https://mailuc-my.sharepoint.com/:f:/g/personal/wang2ba_ucmail_uc_edu/Ej4IxFX-ZlVOgH2Ipc-C4p8BK-i_5iCt6bhxMx0xf8RUBg?e=9rHlsN
 
-Note: the above link needs to be updated every 6 months due to certain settings of OneDrive. If you find the link is expired and you cannot access the data, please feel free to email us (boyang.wang@uc.edu). We will be update the link as soon as we can. Thanks!   
+Note: the above link needs to be updated every 6 months due to certain settings of OneDrive. If you find the link is expired and you cannot access the data, please feel free to email us (boyang.wang@uc.edu). We will update the link as soon as we can. Thanks!   
 
 ### Additional information
 The additional_info has information about the structures of the neural networks and its hyperparameters
