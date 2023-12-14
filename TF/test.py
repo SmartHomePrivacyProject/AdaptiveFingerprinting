@@ -15,7 +15,6 @@ toolsDir = os.path.join(RootDir, 'tools')
 sys.path.append(toolsDir)
 import utility
 from utility import create_test_set_Wang_disjoint, kNN_accuracy
-import mytools.tools as mytools
 
 currentDir = os.path.dirname(__file__)
 ResDir = os.path.join(currentDir, 'res_out')

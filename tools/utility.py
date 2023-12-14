@@ -17,9 +17,31 @@ from keras.preprocessing.sequence import pad_sequences
 RootDir = os.getenv('ROOT_DIR')
 toolsDir = os.path.join(RootDir, 'tools')
 sys.path.append(toolsDir)
-import csv2npz
-import mytools.fileUtils as fileUtils
-import mytools.tools as mytools
+
+
+def padData(dataList, expDim):
+    #new_dataList = dataList + [0 for i in range(expDim - len_dataList)]
+    if isinstance(dataList, np.ndarray):
+        len_dataList = len(dataList)
+        if len_dataList >= expDim:
+            dataList  = dataList[0:expDim]
+        else:
+            dataList.extend([0]*(expDim-len_dataList))
+    else:
+        # in this case it is list of list and with un-even length
+        clean_data_list = []
+        for i in range(len(dataList)):
+            one_sameple = dataList[i]
+            sampleLen = len(one_sameple)
+            if sampleLen > expDim:
+                new_sample = one_sameple[:expDim]
+            else:
+                one_sameple.extend([0]*(expDim-sampleLen))
+                new_sample = one_sameple
+            clean_data_list.append(new_sample)
+        dataList = np.array(clean_data_list)
+
+    return dataList
 
 
 def getSiteDict(inp, data_dim):
@@ -29,7 +51,7 @@ def getSiteDict(inp, data_dim):
     site_dict = defaultdict(list)
     for i in range(x.shape[0]):
         oneSample = x[i, :]
-        oneSample = csv2npz.padData(oneSample, data_dim)
+        oneSample = padData(oneSample, data_dim)
         oneLabel = y[i]
         site_dict[oneLabel].append(oneSample)
 
@@ -115,10 +137,28 @@ def computeTopN(topN, knn, X_test, y_test):
     return acc_knn_top5
 
 
+def datadict2data(datadict, keys=[], shuffle=True):
+    allData, allLabel = [], []
+
+    if not keys:
+        keys = list(datadict.keys())
+
+    for key in keys:
+        oneCls = datadict[key]
+        oneLabel = np.ones(len(oneCls)) * int(float(key))
+        allData.extend(oneCls)
+        allLabel.extend(oneLabel)
+
+    if shuffle:
+        allData, allLabel = shuffleData(allData, allLabel)
+
+    return allData, allLabel
+
+
 def kNN_train(signature_vector_dict, params):
     site_labels = list(signature_vector_dict.keys())
     random.shuffle(site_labels)
-    X_train, y_train = mytools.datadict2data(signature_vector_dict)
+    X_train, y_train = datadict2data(signature_vector_dict)
     print('kNN training data shape: ', X_train.shape)
 
     knn = KNeighborsClassifier(n_neighbors=params['k'], weights=params['weights'], p=params['p'], metric=params['metric'], algorithm='brute')

@@ -31,8 +31,6 @@ modelDir = os.path.join(RootDir, 'models')
 sys.path.append(toolsDir)
 sys.path.append(modelDir)
 import utility
-import mytools.tools as mytools
-import augData
 
 ProjectDir = os.path.join(RootDir, 'ADA-Keras')
 ResDir = os.path.join(ProjectDir, 'res_out')
@@ -41,9 +39,7 @@ os.makedirs(modelDir, exist_ok=True)
 
 
 def tuning_model(inp, extractor, pre_model, feature_model, data_dict, sites, augData=0):
-    allData, allLabel = mytools.datadict2data(data_dict, sites)
-    if augData:
-        allData, allLabel = augData.data_aug(allData, allLabel, newSamNum=20)
+    allData, allLabel = data.datadict2data(data_dict, sites)
     clsNum = len(sites)
     allData = allData[:, :, np.newaxis]
     allLabel = to_categorical(allLabel, clsNum)

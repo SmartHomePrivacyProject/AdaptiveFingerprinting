@@ -21,7 +21,6 @@ import test
 RootDir = os.getenv('ROOT_DIR')
 toolsDir = os.path.join(RootDir, 'tools')
 import utility
-import mytools.tools as mytools
 
 thisFile = os.path.abspath(__file__)
 currentDir = os.path.dirname(thisFile)
@@ -181,7 +180,7 @@ def run(param, args):
             for i in range(test_num):
                 # Train phase
                 signature_dict, test_dict, sites = utility.getDataDict(args.target, n_shot=n_shot, data_dim=param['inp_dims'], train_pool_size=20, test_size=70)
-                target_data, target_label = mytools.datadict2data(signature_dict)
+                target_data, target_label = data.datadict2data(signature_dict)
                 print('target data shape: ', target_data.shape)
                 target_data = target_data[:, :, np.newaxis]
                 target_label = data.one_hot_encoding(target_label, len(set(target_label)))
@@ -223,7 +222,7 @@ def run(param, args):
             for i in range(test_num):
                 # Train phase
                 signature_dict, test_dict, sites = utility.getDataDict(args.target, n_shot=n_shot, data_dim=param['inp_dims'], train_pool_size=20, test_size=70)
-                target_data, target_label = mytools.datadict2data(signature_dict)
+                target_data, target_label = data.datadict2data(signature_dict)
                 target_data = target_data[:, :, np.newaxis]
                 target_label = data.one_hot_encoding(target_label, len(set(target_label)))
                 param["target_data"], param["target_label"] = target_data, target_label
@@ -245,7 +244,7 @@ def run(param, args):
         # Train phase
         n_shot = 20
         signature_dict, test_dict, sites = utility.getDataDict(args.target, n_shot=n_shot, data_dim=param['inp_dims'], train_pool_size=20, test_size=70)
-        target_data, target_label = mytools.datadict2data(signature_dict)
+        target_data, target_label = data.datadict2data(signature_dict)
         target_data = target_data[:, :, np.newaxis]
         target_label = data.one_hot_encoding(target_label, len(set(target_label)))
         param["target_data"], param["target_label"] = target_data, target_label
